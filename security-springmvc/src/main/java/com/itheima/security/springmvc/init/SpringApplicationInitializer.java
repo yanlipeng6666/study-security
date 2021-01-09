@@ -5,6 +5,7 @@ import com.itheima.security.springmvc.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
+ * spring容器初始化
  * Program Name: security-springmvc
  * Created by yanlp on 2021-01-08
  *
