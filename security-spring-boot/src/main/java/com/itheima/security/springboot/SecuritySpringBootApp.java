@@ -2,7 +2,6 @@ package com.itheima.security.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * Program Name: security-itheima
@@ -11,7 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @author yanlp
  * @version 1.0
  */
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class SecuritySpringBootApp {
     public static void main(String[] args) {
         SpringApplication.run(SecuritySpringBootApp.class, args);
