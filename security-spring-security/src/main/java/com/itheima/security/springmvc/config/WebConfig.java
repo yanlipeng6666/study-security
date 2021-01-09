@@ -32,8 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        // 中新增如下配置，将/直接导向login.jsp页面.  貌似用自己tomcat起,不需要该配置
-        // registry.addViewController("/").setViewName("login");
+        // registry.addViewController("/").setViewName("redirect:/login");
     }
 
     // @Override
