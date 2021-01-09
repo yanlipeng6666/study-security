@@ -12,6 +12,8 @@ package com.itheima.security.springmvc.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 public class UserDto {
@@ -22,4 +24,8 @@ public class UserDto {
     private String password;
     private String fullname;
     private String mobile;
+    /**
+     * 权限
+     */
+    private Set<String> authorities;
 }

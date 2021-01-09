@@ -47,19 +47,32 @@ public class LoginController {
         return "登出成功";
     }
 
-    @GetMapping(value = "/getSession", produces = {"text/plain;charset=UTF-8"})
-    public String getSession(HttpSession session) {
+    @GetMapping(value = "/r/r1", produces = {"text/plain;charset=UTF-8"})
+    public String r1(HttpSession session) {
         Object obj = session.getAttribute(UserDto.SESSION_USER_KEY);
         String fullName ;
         if (obj != null) {
             UserDto userDto = (UserDto) obj;
             fullName = userDto.getFullname();
         } else {
-            fullName = "没有此人.....";
+            fullName = "匿名.....";
         }
         return fullName + " 访问资源1";
     }
 
+
+    @GetMapping(value = "/r/r2", produces = {"text/plain;charset=UTF-8"})
+    public String r2(HttpSession session) {
+        Object obj = session.getAttribute(UserDto.SESSION_USER_KEY);
+        String fullName ;
+        if (obj != null) {
+            UserDto userDto = (UserDto) obj;
+            fullName = userDto.getFullname();
+        } else {
+            fullName = "匿名.....";
+        }
+        return fullName + " 访问资源2";
+    }
 
 
 }
