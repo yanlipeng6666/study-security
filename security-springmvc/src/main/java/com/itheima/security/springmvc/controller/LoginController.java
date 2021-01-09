@@ -4,8 +4,11 @@ import com.itheima.security.springmvc.model.AuthenticationRequest;
 import com.itheima.security.springmvc.model.UserDto;
 import com.itheima.security.springmvc.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Program Name: security-springmvc
@@ -24,10 +27,39 @@ public class LoginController {
      *
      * @return
      */
-    @PostMapping(value = "/login",produces = {"text/plain;charset=UTF-8"})
-    public String login( AuthenticationRequest authenticationRequest) {
+    @PostMapping(value = "/login", produces = {"text/plain;charset=UTF-8"})
+    public String login(AuthenticationRequest authenticationRequest, HttpSession session) {
         UserDto userDto = authenticationService.authentication(authenticationRequest);
+        if (userDto != null) {
+            session.setAttribute(UserDto.SESSION_USER_KEY, userDto);
+        }
         return userDto.getFullname() + " 登录成功";
     }
+
+    /**
+     * 退出登录
+     * @param session
+     * @return
+     */
+    @GetMapping(value = "/logout", produces = {"text/plain;charset=UTF-8"})
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "登出成功";
+    }
+
+    @GetMapping(value = "/getSession", produces = {"text/plain;charset=UTF-8"})
+    public String getSession(HttpSession session) {
+        Object obj = session.getAttribute(UserDto.SESSION_USER_KEY);
+        String fullName ;
+        if (obj != null) {
+            UserDto userDto = (UserDto) obj;
+            fullName = userDto.getFullname();
+        } else {
+            fullName = "没有此人.....";
+        }
+        return fullName + " 访问资源1";
+    }
+
+
 
 }

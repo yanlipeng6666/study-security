@@ -15,6 +15,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserDto {
+    public static final String SESSION_USER_KEY = "_user";
+
     private String id;
     private String username;
     private String password;
