@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -62,6 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login-view")// 指定我们自己的登录页面,spring security以重定向方式跳转到/login
                 .loginProcessingUrl("/login")// 指定登录处理的url,与login.jsp的action要对上,，也就是用户名、密码表单提交的目的路径
                 .successForwardUrl("/login-success")// 自定义登录成功的页面地址,在Controller里有对应的路径请求
-                 .permitAll();
+                 .permitAll()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+        ;
     }
 }
