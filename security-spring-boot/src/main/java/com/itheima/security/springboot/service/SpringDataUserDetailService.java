@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-public class SpringDataDetailService implements UserDetailsService {
+public class SpringDataUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 根据账号去数据库查询...
