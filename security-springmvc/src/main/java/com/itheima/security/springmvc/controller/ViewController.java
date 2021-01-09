@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/view")
 public class ViewController {
 
+    /**
+     * 跳转页面
+     * @return
+     */
     @RequestMapping("/toLogin")
     public String toLogin() {
-        return "/login";
+        return "login";
     }
 }

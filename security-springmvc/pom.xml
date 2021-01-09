@@ -38,16 +38,12 @@
         <finalName>security‐springmvc</finalName>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat8-maven-plugin</artifactId>
-                    <version>3.0-r1655215</version>
-                    <configuration>
-                        <port>8080</port>
-                        <path>/</path>
-                        <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
-                    </configuration>
-                </plugin>
+                <!--暂时不用跟视频讲的用tomcat插件,老师讲的是用tomcat7,自己用不了.... 所以使用自己的tomcat,-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.tomcat.maven</groupId>-->
+<!--                    <artifactId>tomcat8-maven-plugin</artifactId>-->
+<!--                    <version>3.0-r1655215</version>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
