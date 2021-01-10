@@ -2,6 +2,7 @@ package com.itheima.security.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @version 1.0
  */
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -54,8 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()// 不再限制CSRF
                 .authorizeRequests()
-                .antMatchers("/r/r1").hasAnyAuthority("p1")//所有访问r/r1的请求,必须有p1权限
-                .antMatchers("/r/r2").hasAnyAuthority("p2")//所有访问r/r2的请求,必须有p2权限
+                // .antMatchers("/r/r1").hasAnyAuthority("p1")//所有访问r/r1的请求,必须有p1权限
+                // .antMatchers("/r/r2").hasAnyAuthority("p2")//所有访问r/r2的请求,必须有p2权限
                 .antMatchers("/r/**").authenticated()// 所有antMatchers表明的请求必须认证
                 .anyRequest().permitAll()// 除了antMatchers,其他请求可以访问
                 .and()
