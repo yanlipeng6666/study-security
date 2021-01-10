@@ -1,5 +1,6 @@
 package com.itheima.security.springboot.dao;
 
+import com.itheima.security.springboot.model.PermissionDto;
 import com.itheima.security.springboot.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 此处为了方便,不使用接口注入了,直接用类注入
@@ -32,4 +34,13 @@ public class UserDao {
         return null;
     }
 
+    public List<String> getPermissionCodeByUserId(String userId) {
+        String sql = "select a.* from t_permission as a \n" +
+                "left join t_role_permission as b on  a.id = b.permission_id\n" +
+                "left join t_user_role as c on b.role_id = c.role_id\n" +
+                "where c.user_id = ? ";
+        List<PermissionDto> permissionDtoList =  jdbcTemplate.query(sql,new Object[]{userId},new BeanPropertyRowMapper<>(PermissionDto.class));
+        return permissionDtoList.stream().map(PermissionDto::getCode).collect(Collectors.toList());
+
+    }
 }
