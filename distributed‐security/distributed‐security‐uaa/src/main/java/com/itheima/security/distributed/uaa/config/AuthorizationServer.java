@@ -16,9 +16,14 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.Arrays;
 
 /**
+ * 授权服务
  * Program Name: distributed‐security
  * Created by yanlp on 2021-01-10
  *
@@ -37,6 +42,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     private AuthorizationCodeServices authorizationCodeServices;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
 
 
     @Override
@@ -74,9 +81,14 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Bean
     public AuthorizationServerTokenServices tokenService() {
         DefaultTokenServices service = new DefaultTokenServices();
-        service.setClientDetailsService(clientDetailsService);
-        service.setSupportRefreshToken(true);
-        service.setTokenStore(tokenStore);
+        service.setClientDetailsService(clientDetailsService);// 客户端详情服务
+        service.setSupportRefreshToken(true);// 支持刷新令牌
+        service.setTokenStore(tokenStore);// 令牌存储策略
+        // 令牌增强
+        TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+        enhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter));
+        service.setTokenEnhancer(enhancerChain);
+
         service.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
         service.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
         return service;
