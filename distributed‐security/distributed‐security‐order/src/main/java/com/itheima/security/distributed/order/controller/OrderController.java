@@ -17,7 +17,7 @@ public class OrderController {
     @PreAuthorize("hasAuthority('p1')")//拥有p1权限方可访问此url
     public String r1(){
         UserDTO userDTO= (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userDTO.getUsername() + "访问资源1";
+        return userDTO.getUsername() +"===>"+ userDTO.getFullname() + "访问资源1";
         // return "访问资源1";
     }
 

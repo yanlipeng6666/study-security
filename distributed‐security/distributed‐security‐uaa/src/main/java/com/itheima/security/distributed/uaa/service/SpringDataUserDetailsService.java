@@ -1,5 +1,6 @@
 package com.itheima.security.distributed.uaa.service;
 
+import com.alibaba.fastjson.JSON;
 import com.itheima.security.distributed.uaa.dao.UserDao;
 import com.itheima.security.distributed.uaa.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,10 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         //将permissions转成数组
         String[] permissionArray = new String[permissions.size()];
         permissions.toArray(permissionArray);
-        UserDetails userDetails = User.withUsername(userDto.getUsername()).password(userDto.getPassword()).authorities(permissionArray).build();
+
+        String userDTOStr = JSON.toJSONString(userDto);
+
+        UserDetails userDetails = User.withUsername(userDTOStr).password(userDto.getPassword()).authorities(permissionArray).build();
         return userDetails;
     }
 }
