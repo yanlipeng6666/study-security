@@ -23,6 +23,11 @@ public class EncryptUtil {
         return bytes;
     }
 
+    /**
+     * 转成64
+     * @param str
+     * @return
+     */
     public static String encodeUTF8StringBase64(String str){
         String encoded = null;
         try {

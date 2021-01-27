@@ -34,6 +34,11 @@ public class EncryptUtil {
 
     }
 
+    /**
+     * 解析
+     * @param str
+     * @return
+     */
     public static String  decodeUTF8StringBase64(String str){
         String decoded = null;
         byte[] bytes = Base64.getDecoder().decode(str);
